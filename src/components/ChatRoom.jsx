@@ -1,5 +1,7 @@
-// src/components/ChatRoom.jsx
 import { useState } from 'react';
+import MessageList from './MessageList';
+import MessageInput from './MessageInput';
+import NavBar from './NavBar';
 
 function ChatRoom() {
   const [messages, setMessages] = useState([
@@ -24,25 +26,15 @@ function ChatRoom() {
 
   return (
     <>
-    <div className="text-2xl text-red-500">Hello Tailwind</div>
-    <div className="chat-room">
-      <h2>Chat Room</h2>
-      <div className="messages">
-        {messages.map((msg) => (
-          <div key={msg.id} className="message">
-            <strong>{msg.sender}:</strong> {msg.text}
-          </div>
-        ))}
-      </div>
-      <form onSubmit={handleSend}>
-        <input
-          type="text"
-          placeholder="Type your message..."
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-        />
-        <button type="submit">Send</button>
-      </form>
+    <NavBar />
+    <div className="flex flex-col h-screen max-w-xxl mx-auto p-4 bg-gray-100">
+      <h2 className="text-2xl font-bold mb-4">Chat Room</h2>
+      <MessageList messages={messages} />
+      <MessageInput
+        newMessage={newMessage}
+        setNewMessage={setNewMessage}
+        onSend={handleSend}
+      />
     </div>
     </>
   );
